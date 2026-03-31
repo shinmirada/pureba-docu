@@ -1,12 +1,10 @@
 package com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.Organization;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-
 
 @Data
 @NoArgsConstructor
@@ -14,11 +12,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Información del estado de un documento")
 public class DocumentStateDto {
 
-    @Schema(description = "ID único del estado", example = "1", accessMode = Schema.AccessMode.READ_ONLY,required = true)
+    @Schema(description = "ID único del estado", example = "1", accessMode = Schema.AccessMode.READ_ONLY, required = true)
     private Long stateId;
 
-    @Schema(description = "Organización a la que pertenece el estado", example = "Organization{id=1, name='Tech Corp', ...}", required = true, accessMode = Schema.AccessMode.READ_ONLY)
-    private Organization organization;
+    @Schema(description = "ID de la organización a la que pertenece el estado", example = "1", required = true, accessMode = Schema.AccessMode.READ_ONLY)
+    private Long organizationId;
 
     @Schema(description = "Código del estado", example = "DRAFT", required = true, accessMode = Schema.AccessMode.READ_ONLY)
     private String code;

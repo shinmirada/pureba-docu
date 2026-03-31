@@ -7,62 +7,63 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.AuditLog;
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.DocumentType;
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.DocumentVersion;
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.Notification;
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.Organization;
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.Task;
-import com.AlexisSandroDilanMunoz.ProyectoAsignatura.persistenceLayer.entity.UserAccount;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Información de un documento")
+@Schema(description = "Información completa de un documento, respuesta del servidor")
 public class DocumentDto {
 
-    @Schema(description = "ID único del documento", example = "1", accessMode = Schema.AccessMode.READ_ONLY, required = true)
+    @Schema(description = "ID único del documento", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long documentId;
 
-    @Schema(description = "Organización a la que pertenece el documento", example = "Organization{id=1, name='Tech Corp', ...}", required = true, accessMode = Schema.AccessMode.READ_ONLY)
-    private Organization organization;
+    @Schema(description = "ID de la organización propietaria del documento", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
+    private Long organizationId;
 
-    @Schema(description = "Tipo de documento", example = "DocumentType{id=1, name='Informe', ...}", required = true, accessMode = Schema.AccessMode.READ_ONLY)
-    private DocumentType documentType;
+    @Schema(description = "Nombre de la organización", example = "Tech Corp S.A.S", accessMode = Schema.AccessMode.READ_ONLY)
+    private String organizationName;
 
-    @Schema(description = "Usuario que creó el documento", example = "UserAccount{id=1, username='john_doe', ...}", required = true, accessMode = Schema.AccessMode.READ_ONLY)
-    private UserAccount createdBy;
+    @Schema(description = "ID del tipo documental asignado", example = "3", accessMode = Schema.AccessMode.READ_ONLY)
+    private Long documentTypeId;
 
-    @Schema(description = "Título del documento", example = "Informe de ventas Q4")
+    @Schema(description = "Nombre del tipo documental", example = "Contrato", accessMode = Schema.AccessMode.READ_ONLY)
+    private String documentTypeName;
+
+    @Schema(description = "ID del usuario que creó el documento", example = "5", accessMode = Schema.AccessMode.READ_ONLY)
+    private Long createdById;
+
+    @Schema(description = "Nombre completo del usuario que creó el documento", example = "Jane Smith", accessMode = Schema.AccessMode.READ_ONLY)
+    private String createdByName;
+
+    @Schema(description = "Título del documento", example = "Contrato Marco 2024")
     private String title;
 
-    @Schema(description = "Descripción del documento", example = "Informe detallado de las ventas del cuatrimestre")
+    @Schema(description = "Descripción del documento", example = "Contrato marco de servicios tecnológicos para el año 2024")
     private String description;
 
-    @Schema(description = "Estado actual del documento", example = "BORRADOR, EN_REVISIÓN, APROBADO")
+    @Schema(description = "Estado actual del documento", example = "CREADO", allowableValues = { "CREADO",
+            "EN_REVISION", "APROBADO", "RECHAZADO" }, accessMode = Schema.AccessMode.READ_ONLY)
     private String currentState;
-    
-    @Schema(description = "Fecha de creación del documento", example = "2024-06-01T12:00:00")
+
+    @Schema(description = "Fecha de creación del documento", example = "2024-06-01T12:00:00", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime createdAt;
-    
-    @Schema(description = "Fecha de la última actualización del documento", example = "2024-06-01T12:00:00")
+
+    @Schema(description = "Fecha de la última modificación del documento", example = "2024-06-05T09:30:00", accessMode = Schema.AccessMode.READ_ONLY)
     private LocalDateTime updatedAt;
 
-    @Schema(description = "Código de referencia del documento", example = "DOC-2024-001", accessMode = Schema.AccessMode.READ_ONLY)
+    @Schema(description = "Código de referencia único generado por el sistema", example = "DOC-2024-001", accessMode = Schema.AccessMode.READ_ONLY)
     private String referenceCode;
-    
-    @Schema(description = "Versiones del documento", required = false)
-    private List<DocumentVersion> documentVersions;
-    
-    @Schema(description = "Tareas asociadas al documento", required = false)
-    private List<Task> tasks;
 
-    @Schema(description = "Registros de auditoría relacionados con el documento", required = false)
-    private List<AuditLog> auditLogs;
+    @Schema(description = "Historial de versiones del documento", accessMode = Schema.AccessMode.READ_ONLY)
+    private List<DocumentVersionDto> documentVersions;
 
-    @Schema(description = "Notificaciones relacionadas con el documento", required = false)
-    private List<Notification> notifications;
+    @Schema(description = "Tareas del flujo asociadas al documento", accessMode = Schema.AccessMode.READ_ONLY)
+    private List<TaskDto> tasks;
 
+    @Schema(description = "Registros de auditoría del documento", accessMode = Schema.AccessMode.READ_ONLY)
+    private List<AuditLogDto> auditLogs;
+
+    @Schema(description = "Notificaciones generadas por este documento", accessMode = Schema.AccessMode.READ_ONLY)
+    private List<NotificationDto> notifications;
 }
