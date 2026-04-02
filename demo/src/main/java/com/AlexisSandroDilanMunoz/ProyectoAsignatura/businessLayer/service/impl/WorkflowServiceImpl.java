@@ -27,7 +27,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     private final UserRoleRepository userRoleRepository;
     private final DocumentTypeRepository documentTypeRepository;
     private final NotificationService notificationService;
-    private final AuditLogService auditLogService; 
+    private final AuditLogService auditLogService;
     private final SecurityContextHelper securityHelper;
 
     @Override
@@ -118,7 +118,16 @@ public class WorkflowServiceImpl implements WorkflowService {
         if (approved) {
             List<WorkflowStep> steps = workflowStepRepository
                     .findByWorkflowWorkflowIdOrderByStepOrderAsc(workflow.getWorkflowId());
-            int currentIndex = steps.indexOf(currentStep);
+            int currentIndex = -1;
+            for (int i = 0; i < steps.size(); i++) {
+                if (steps.get(i).getStepId().equals(currentStep.getStepId())) {
+                    currentIndex = i;
+                    break;
+                }
+            }
+            if (currentIndex == -1)
+                throw new RuntimeException("Paso del flujo no encontrado");
+
             if (currentIndex + 1 < steps.size()) {
                 WorkflowStep nextStep = steps.get(currentIndex + 1);
                 createTaskForStep(nextStep, doc.getDocumentId());
