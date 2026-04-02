@@ -42,8 +42,8 @@ public class NotificationServiceImpl implements NotificationService {
         if (doc == null || creator == null)
             return;
 
-        NotificationTemplateDto template = getActiveTemplate(doc.getOrganization().getOrganizationId(),
-                "DOCUMENT_CREADO");
+        NotificationTemplateDto template = getActiveTemplate(
+                doc.getOrganization().getOrganizationId(), "DOCUMENTO_CREADO");
         if (template == null)
             return;
 

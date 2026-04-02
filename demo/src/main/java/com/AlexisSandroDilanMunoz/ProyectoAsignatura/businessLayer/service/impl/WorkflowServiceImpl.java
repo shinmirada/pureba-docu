@@ -27,7 +27,7 @@ public class WorkflowServiceImpl implements WorkflowService {
     private final UserRoleRepository userRoleRepository;
     private final DocumentTypeRepository documentTypeRepository;
     private final NotificationService notificationService;
-    private final AuditLogService auditLogService; // 🔽 NUEVO
+    private final AuditLogService auditLogService; 
     private final SecurityContextHelper securityHelper;
 
     @Override
