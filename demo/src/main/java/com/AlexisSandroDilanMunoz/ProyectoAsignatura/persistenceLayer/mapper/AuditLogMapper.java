@@ -8,22 +8,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para AuditLog ↔ AuditLogDto
- *
- * MAPEOS CON DOT-NOTATION:
- * - documentId    ← entity.document.documentId
- * - documentTitle ← entity.document.title
- * - userId        ← entity.user.userId
- * - userName      ← entity.user.username
- *
- * MAPEOS AUTOMÁTICOS:
- * - auditId, actionType, actionDetail, timestamp, ipAddress, metadata
- *
- * NOTA: AuditLog es SOLO LECTURA desde la perspectiva del API.
- * Se crea automáticamente por el sistema (RF33), nunca por el cliente.
- * Por eso solo necesitamos toDTO y toEntity (este último para uso interno del Service).
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

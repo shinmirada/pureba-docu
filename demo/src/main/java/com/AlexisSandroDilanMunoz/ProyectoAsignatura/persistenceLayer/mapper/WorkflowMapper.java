@@ -9,26 +9,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para Workflow ↔ DTOs
- *
- * MAPEOS CON DOT-NOTATION:
- * - organizationId   ← entity.organization.organizationId
- * - organizationName ← entity.organization.name
- * - documentTypeId   ← entity.documentType.documentTypeId
- * - documentTypeName ← entity.documentType.name
- *
- * MAPEOS CON uses (WorkflowStepMapper convierte automáticamente las listas):
- * - steps ← entity.workflowSteps  (List<WorkflowStep> → List<WorkflowStepDto>)
- *
- * MAPEOS AUTOMÁTICOS:
- * - workflowId, name, description, isActive, configJson
- *
- * NOTA sobre el campo steps vs workflowSteps:
- * La entidad tiene: List<WorkflowStep> workflowSteps
- * El DTO tiene:     List<WorkflowStepDto> steps
- * → Nombres diferentes → necesita @Mapping explícito.
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN,

@@ -9,25 +9,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para Task ↔ TaskDto
- *
- * MAPEOS CON DOT-NOTATION:
- * - documentId            ← entity.document.documentId
- * - documentTitle         ← entity.document.title
- * - documentReferenceCode ← entity.document.referenceCode
- * - stepId                ← entity.step.stepId
- * - stepName              ← entity.step.name
- * - stepOrder             ← entity.step.stepOrder
- * - assignedToId          ← entity.assignedTo.userId
- * - assignedToName        ← entity.assignedTo.fullName
- *
- * MAPEOS AUTOMÁTICOS:
- * - taskId, status, createdAt, dueDate, completedAt, comments
- *
- * NOTA: Las tareas las crea el sistema automáticamente al iniciar un flujo (RF29).
- * El cliente solo puede: leer su bandeja y completar/rechazar una tarea (RF30).
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

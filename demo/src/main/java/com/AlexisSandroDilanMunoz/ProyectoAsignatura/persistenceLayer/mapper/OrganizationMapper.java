@@ -7,21 +7,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para Organization ↔ DTOs
- *
- * MAPEOS AUTOMÁTICOS (mismo nombre en entidad y DTO):
- * - organizationId, name, domain, createdAt, status
- *
- * CAMPOS IGNORADOS al crear entidad:
- * - organizationId: lo genera la BD
- * - createdAt, status: los inicializa el Service
- * - Colecciones @OneToMany: no existen al crear, JPA las gestiona
- *
- * NOTA sobre OrganizationCreateDto:
- * - Los campos adminUsername, adminEmail, adminPassword, adminFullName
- *   NO se mapean aquí — el Service los usa para crear el primer UserAccount.
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

@@ -7,16 +7,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para NotificationTemplate ↔ NotificationTemplateDto
- *
- * MAPEOS CON DOT-NOTATION:
- * - organizationId   ← entity.organization.organizationId
- * - organizationName ← entity.organization.name
- *
- * MAPEOS AUTOMÁTICOS:
- * - templateId, name, subject, bodyHtml, bodyText, variablesJson, isActive
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

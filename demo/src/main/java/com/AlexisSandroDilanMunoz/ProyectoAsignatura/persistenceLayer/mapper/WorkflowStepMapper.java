@@ -9,18 +9,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para WorkflowStep ↔ DTOs
- *
- * MAPEOS CON DOT-NOTATION:
- * - workflowId       ← entity.workflow.workflowId
- * - workflowName     ← entity.workflow.name
- * - assignedRoleId   ← entity.assignedRole.roleId
- * - assignedRoleName ← entity.assignedRole.name
- *
- * MAPEOS AUTOMÁTICOS:
- * - stepId, stepOrder, name, stepType, required, timeoutDays
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

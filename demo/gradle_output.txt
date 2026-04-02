@@ -1,0 +1,93 @@
+
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\AuthServiceImpl.java:4: error: cannot find symbol
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.security.JwtTokenProvider;
+                                                                           ^
+  symbol:   class JwtTokenProvider
+  location: package com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.security
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\AuthServiceImpl.java:29: error: cannot find symbol
+    private final JwtTokenProvider tokenProvider;
+                  ^
+  symbol:   class JwtTokenProvider
+  location: class AuthServiceImpl
+> Task :compileJava FAILED
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\AuthServiceImpl.java:21: error: cannot find symbol
+@RequiredArgsConstructor
+^
+  symbol:   class JwtTokenProvider
+  location: class AuthServiceImpl
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:12: error: package org.springframework.mail.javamail does not exist
+import org.springframework.mail.javamail.JavaMailSender;
+                                        ^
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:13: error: package org.springframework.mail.javamail does not exist
+import org.springframework.mail.javamail.MimeMessageHelper;
+                                        ^
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:17: error: package javax.mail does not exist
+import javax.mail.MessagingException;
+                 ^
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:18: error: package javax.mail.internet does not exist
+import javax.mail.internet.MimeMessage;
+                          ^
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:35: error: cannot find symbol
+    private final JavaMailSender mailSender;
+                  ^
+  symbol:   class JavaMailSender
+  location: class NotificationServiceImpl
+C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:26: error: cannot find symbol
+@RequiredArgsConstructor
+^
+  symbol:   class JavaMailSender
+  location: class NotificationServiceImpl
+9 errors
+
+[Incubating] Problems report is available at: file:///C:/Users/alexi/Desktop/Proyecto-Docu-Cloud/demo/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\AuthServiceImpl.java:4: error: cannot find symbol
+  import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.security.JwtTokenProvider;
+                                                                             ^
+    symbol:   class JwtTokenProvider
+    location: package com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.security
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\AuthServiceImpl.java:29: error: cannot find symbol
+      private final JwtTokenProvider tokenProvider;
+                    ^
+    symbol:   class JwtTokenProvider
+    location: class AuthServiceImpl
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\AuthServiceImpl.java:21: error: cannot find symbol
+  @RequiredArgsConstructor
+  ^
+    symbol:   class JwtTokenProvider
+    location: class AuthServiceImpl
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:35: error: cannot find symbol
+      private final JavaMailSender mailSender;
+                    ^
+    symbol:   class JavaMailSender
+    location: class NotificationServiceImpl
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:26: error: cannot find symbol
+  @RequiredArgsConstructor
+  ^
+    symbol:   class JavaMailSender
+    location: class NotificationServiceImpl
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:12: error: package org.springframework.mail.javamail does not exist
+  import org.springframework.mail.javamail.JavaMailSender;
+                                          ^
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:13: error: package org.springframework.mail.javamail does not exist
+  import org.springframework.mail.javamail.MimeMessageHelper;
+                                          ^
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:17: error: package javax.mail does not exist
+  import javax.mail.MessagingException;
+                   ^
+  C:\Users\alexi\Desktop\Proyecto-Docu-Cloud\demo\src\main\java\com\AlexisSandroDilanMunoz\ProyectoAsignatura\businessLayer\service\impl\NotificationServiceImpl.java:18: error: package javax.mail.internet does not exist
+  import javax.mail.internet.MimeMessage;
+                            ^
+  9 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 4s
+1 actionable task: 1 executed

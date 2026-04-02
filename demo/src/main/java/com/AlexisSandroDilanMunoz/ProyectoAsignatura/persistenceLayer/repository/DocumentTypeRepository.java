@@ -13,6 +13,9 @@ public interface DocumentTypeRepository extends JpaRepository<DocumentType, Long
     // Listar todos los tipos documentales de una organización (RF24–RF27, RF42)
     List<DocumentType> findByOrganizationOrganizationId(Long organizationId);
 
+    // Listar paginado de una organización
+    org.springframework.data.domain.Page<DocumentType> findByOrganizationOrganizationId(Long organizationId, org.springframework.data.domain.Pageable pageable);
+
     // Buscar por id validando organización — seguridad multi-tenant (RF25, RF26)
     Optional<DocumentType> findByDocumentTypeIdAndOrganizationOrganizationId(Long documentTypeId, Long organizationId);
 

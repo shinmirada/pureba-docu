@@ -11,35 +11,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para Document ↔ DTOs — EL MÁS COMPLEJO DEL PROYECTO
- *
- * ¿Por qué uses = {...}?
- * DocumentDto tiene cuatro listas de DTOs anidados:
- *   List<DocumentVersionDto> documentVersions
- *   List<TaskDto>            tasks
- *   List<AuditLogDto>        auditLogs
- *   List<NotificationDto>    notifications
- *
- * La entidad Document tiene las entidades correspondientes.
- * Con "uses", MapStruct busca automáticamente en esos mappers
- * el método que convierte List<X> → List<XDto> y lo aplica.
- * Sin "uses", MapStruct no sabría cómo hacer esas conversiones.
- *
- * MAPEOS CON DOT-NOTATION:
- * - organizationId   ← entity.organization.organizationId
- * - organizationName ← entity.organization.name
- * - documentTypeId   ← entity.documentType.documentTypeId
- * - documentTypeName ← entity.documentType.name
- * - createdById      ← entity.createdBy.userId
- * - createdByName    ← entity.createdBy.fullName
- *
- * MAPEOS AUTOMÁTICOS (mismo nombre):
- * - documentId, title, description, currentState,
- *   createdAt, updatedAt, referenceCode
- * - documentVersions, tasks, auditLogs, notifications
- *   (automáticos gracias a "uses" + mismo nombre de campo)
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN,

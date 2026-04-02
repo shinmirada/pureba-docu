@@ -12,24 +12,25 @@ import java.util.List;
 @Repository
 public interface AuditLogRepository extends JpaRepository<AuditLog, Long> {
 
-    // Historial de un documento — más reciente primero (RF34)
-    List<AuditLog> findByDocumentDocumentIdOrderByTimestampDesc(Long documentId);
+        // Historial de un documento — más reciente primero (RF34)
+        Page<AuditLog> findByDocumentDocumentIdOrderByTimestampDesc(Long documentId, Pageable pageable);
 
-    // Filtrar por tipo de acción (RF36)
-    List<AuditLog> findByActionType(String actionType);
+        // Filtrar por tipo de acción (RF36)
+        List<AuditLog> findByActionType(String actionType);
 
-    // Trazabilidad completa paginada por organización — vista admin (RF36)
-    Page<AuditLog> findByDocumentOrganizationOrganizationId(Long organizationId, Pageable pageable);
+        // Trazabilidad completa paginada por organización — vista admin (RF36)
+        Page<AuditLog> findByDocumentOrganizationOrganizationId(Long organizationId, Pageable pageable);
 
-    // Filtrar por usuario dentro de la organización (RF36)
-    Page<AuditLog> findByUserUserIdAndDocumentOrganizationOrganizationId(
-            Long userId, Long organizationId, Pageable pageable);
+        // Filtrar por usuario dentro de la organización (RF36)
+        Page<AuditLog> findByUserUserIdAndDocumentOrganizationOrganizationId(
+                        Long userId, Long organizationId, Pageable pageable);
 
-    // Filtrar por rango de fechas dentro de la organización (RF36)
-    Page<AuditLog> findByDocumentOrganizationOrganizationIdAndTimestampBetween(
-            Long organizationId, LocalDateTime start, LocalDateTime end, Pageable pageable);
+        // Filtrar por rango de fechas dentro de la organización (RF36)
+        Page<AuditLog> findByDocumentOrganizationOrganizationIdAndTimestampBetween(
+                        Long organizationId, LocalDateTime start, LocalDateTime end, Pageable pageable);
 
-    // Filtro combinado: organización + tipo de acción + rango de fechas (RF36)
-    Page<AuditLog> findByDocumentOrganizationOrganizationIdAndActionTypeAndTimestampBetween(
-            Long organizationId, String actionType, LocalDateTime start, LocalDateTime end, Pageable pageable);
+        // Filtro combinado: organización + tipo de acción + rango de fechas (RF36)
+        Page<AuditLog> findByDocumentOrganizationOrganizationIdAndActionTypeAndTimestampBetween(
+                        Long organizationId, String actionType, LocalDateTime start, LocalDateTime end,
+                        Pageable pageable);
 }

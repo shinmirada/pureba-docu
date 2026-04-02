@@ -7,15 +7,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para DocumentState ↔ DocumentStateDto
- *
- * MAPEOS CON DOT-NOTATION:
- * - organizationId ← entity.organization.organizationId
- *
- * MAPEOS AUTOMÁTICOS:
- * - stateId, code, label, stateOrder
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

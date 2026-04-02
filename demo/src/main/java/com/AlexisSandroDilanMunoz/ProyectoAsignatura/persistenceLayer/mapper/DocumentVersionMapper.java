@@ -8,23 +8,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para DocumentVersion ↔ DocumentVersionDto
- *
- * MAPEOS CON DOT-NOTATION:
- * - documentId      ← entity.document.documentId
- * - documentTitle   ← entity.document.title
- * - uploadedById    ← entity.uploadedBy.userId
- * - uploadedByName  ← entity.uploadedBy.fullName
- *
- * MAPEOS AUTOMÁTICOS:
- * - versionId, versionNumber, filePath, fileName, mimeType,
- *   size, uploadedAt, checksum, isActive
- *
- * NOTA: Las versiones se crean vía multipart/file upload (RF18).
- * El DTO de respuesta es de solo lectura — el Service gestiona
- * toda la lógica de versiones (marcar activa, desactivar anterior, checksum, etc.)
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

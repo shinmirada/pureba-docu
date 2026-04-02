@@ -8,20 +8,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para UserRole ↔ UserRoleDto
- *
- * UserRole es la tabla intermedia entre UserAccount y Role.
- *
- * MAPEOS CON DOT-NOTATION:
- * - userId    ← entity.userAccount.userId
- * - username  ← entity.userAccount.username
- * - roleId    ← entity.role.roleId
- * - roleName  ← entity.role.name
- *
- * MAPEOS AUTOMÁTICOS:
- * - userRoleId
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

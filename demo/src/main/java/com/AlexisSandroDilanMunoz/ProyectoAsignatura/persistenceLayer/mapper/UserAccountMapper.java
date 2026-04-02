@@ -12,27 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Mapper para UserAccount ↔ DTOs
- *
- * CASO ESPECIAL — Lista de roles:
- * La entidad tiene: List<UserRole> userRoles  (relación intermedia user_role)
- * El DTO tiene:     List<RoleDto>  roles       (información aplanada del rol)
- *
- * MapStruct NO puede resolver esto automáticamente porque:
- * 1. Los nombres de campos no coinciden (userRoles ≠ roles)
- * 2. El tipo intermedio UserRole necesita ser "desempaquetado"
- * Solución: método @Named auxiliar que hace la conversión manual.
- *
- * CASO ESPECIAL — Password:
- * - CreateDto tiene: password (texto plano)
- * - Entity tiene:    passwordHash (BCrypt)
- * - El mapper IGNORA passwordHash → el Service lo hashea y lo asigna.
- *
- * CASO ESPECIAL — Organization:
- * - El Service asigna la organization completa desde el JWT,
- *   no se mapea desde el DTO.
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

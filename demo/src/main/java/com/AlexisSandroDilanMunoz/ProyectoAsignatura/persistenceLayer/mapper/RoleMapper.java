@@ -7,21 +7,6 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para Role ↔ RoleDto
- *
- * MAPEOS CON DOT-NOTATION (entidad anidada → campo plano en DTO):
- * - organizationId  ← entity.organization.organizationId
- * - organizationName ← entity.organization.name
- *
- * MAPEOS AUTOMÁTICOS:
- * - roleId, name, description
- *
- * CAMPOS IGNORADOS al crear entidad:
- * - roleId: lo genera la BD
- * - organization: el Service la inyecta desde el contexto del usuario autenticado
- * - userRoles, workflowSteps: colecciones @OneToMany gestionadas por JPA
- */
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN

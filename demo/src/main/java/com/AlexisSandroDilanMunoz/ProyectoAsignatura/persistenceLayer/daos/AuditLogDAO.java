@@ -22,11 +22,12 @@ public class AuditLogDAO {
     }
 
     // RF34 - Ver historial de un documento (del más reciente al más antiguo)
-    public List<AuditLog> findByDocument(Long documentId) {
-        return auditLogRepository.findByDocumentDocumentIdOrderByTimestampDesc(documentId);
+    public Page<AuditLog> findByDocument(Long documentId, Pageable pageable) {
+        return auditLogRepository.findByDocumentDocumentIdOrderByTimestampDesc(documentId, pageable);
     }
 
-    // RF34 - Ver historial verificando que el documento pertenece a la organización (paginado)
+    // RF34 - Ver historial verificando que el documento pertenece a la organización
+    // (paginado)
     public Page<AuditLog> findByDocumentAndOrganization(Long documentId, Long organizationId, Pageable pageable) {
         return auditLogRepository.findByDocumentOrganizationOrganizationId(organizationId, pageable);
     }
@@ -38,17 +39,23 @@ public class AuditLogDAO {
 
     // RF36 - Filtrar trazabilidad por usuario dentro de la organización
     public Page<AuditLog> findByUserAndOrganization(Long userId, Long organizationId, Pageable pageable) {
-        return auditLogRepository.findByUserUserIdAndDocumentOrganizationOrganizationId(userId, organizationId, pageable);
+        return auditLogRepository.findByUserUserIdAndDocumentOrganizationOrganizationId(userId, organizationId,
+                pageable);
     }
 
     // RF36 - Filtrar trazabilidad por rango de fechas dentro de la organización
-    public Page<AuditLog> findByOrganizationAndDateRange(Long organizationId, LocalDateTime from, LocalDateTime to, Pageable pageable) {
-        return auditLogRepository.findByDocumentOrganizationOrganizationIdAndTimestampBetween(organizationId, from, to, pageable);
+    public Page<AuditLog> findByOrganizationAndDateRange(Long organizationId, LocalDateTime from, LocalDateTime to,
+            Pageable pageable) {
+        return auditLogRepository.findByDocumentOrganizationOrganizationIdAndTimestampBetween(organizationId, from, to,
+                pageable);
     }
 
-    // RF36 - Filtrar trazabilidad por tipo de acción + rango de fechas dentro de la organización
-    public Page<AuditLog> findByFilters(Long organizationId, String actionType, LocalDateTime from, LocalDateTime to, Pageable pageable) {
-        return auditLogRepository.findByDocumentOrganizationOrganizationIdAndActionTypeAndTimestampBetween(organizationId, actionType, from, to, pageable);
+    // RF36 - Filtrar trazabilidad por tipo de acción + rango de fechas dentro de la
+    // organización
+    public Page<AuditLog> findByFilters(Long organizationId, String actionType, LocalDateTime from, LocalDateTime to,
+            Pageable pageable) {
+        return auditLogRepository.findByDocumentOrganizationOrganizationIdAndActionTypeAndTimestampBetween(
+                organizationId, actionType, from, to, pageable);
     }
 
     // RF36 - Filtrar por tipo de acción

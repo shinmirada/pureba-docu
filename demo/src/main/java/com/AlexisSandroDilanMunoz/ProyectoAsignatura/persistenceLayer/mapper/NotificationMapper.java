@@ -9,25 +9,7 @@ import org.mapstruct.*;
 
 import java.util.List;
 
-/**
- * Mapper para Notification ↔ NotificationDto
- *
- * MAPEOS CON DOT-NOTATION:
- * - templateId    ← entity.template.templateId
- * - templateName  ← entity.template.name
- * - userId        ← entity.user.userId
- * - userName      ← entity.user.fullName
- * - userEmail     ← entity.user.email
- * - documentId    ← entity.document.documentId
- * - documentTitle ← entity.document.title
- *
- * MAPEOS AUTOMÁTICOS:
- * - notificationId, sentAt, status, channel, payloadJson
- *
- * NOTA: Las notificaciones las crea el sistema automáticamente (RF37, RF38, RF39).
- * Son de solo lectura para el cliente — el Service las registra
- * junto con el envío del correo.
- */
+
 @Mapper(
         componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.WARN
