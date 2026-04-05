@@ -1,0 +1,44 @@
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.LoginRequestDto;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.LoginResponseDto;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.OrganizationCreateDto;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.OrganizationDto;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.AuthService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    // Inyección del servicio mediante constructor
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    // Endpoint para registrar una nueva organización
+    @PostMapping("/register")
+    public OrganizationDto registerOrganization(
+            @RequestBody OrganizationCreateDto createDto) {
+
+        return authService.registerOrganization(createDto);
+    }
+
+    // Endpoint para iniciar sesión
+    @PostMapping("/login")
+    public LoginResponseDto login(
+            @RequestBody LoginRequestDto loginRequest) {
+
+        return authService.login(loginRequest);
+    }
+
+    // Endpoint para cerrar sesión
+    @PostMapping("/logout")
+    public void logout(
+            @RequestParam String token) {
+
+        authService.logout(token);
+    }
+}

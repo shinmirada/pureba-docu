@@ -1,0 +1,60 @@
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.OrganizationCreateDto;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.OrganizationDto;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.OrganizationService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/organizations")
+public class OrganizationController {
+
+    private final OrganizationService organizationService;
+
+    // Inyección del servicio mediante constructor
+    public OrganizationController(OrganizationService organizationService) {
+        this.organizationService = organizationService;
+    }
+
+    // Crear una nueva organización
+    @PostMapping
+    public OrganizationDto createOrganization(
+            @RequestBody OrganizationCreateDto createDto) {
+
+        return organizationService.createOrganization(createDto);
+    }
+
+    // Obtener una organización por su id
+    @GetMapping("/{id}")
+    public OrganizationDto getOrganizationById(@PathVariable Long id) {
+        return organizationService.getOrganizationById(id);
+    }
+
+    // Obtener la organización actual (según contexto del usuario)
+    @GetMapping("/current")
+    public OrganizationDto getCurrentOrganization() {
+        return organizationService.getCurrentOrganization();
+    }
+
+    // Actualizar datos de una organización
+    @PutMapping("/{id}")
+    public OrganizationDto updateOrganization(
+            @PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam String domain) {
+
+        return organizationService.updateOrganization(id, name, domain);
+    }
+
+    // Eliminar una organización por su id
+    @DeleteMapping("/{id}")
+    public void deleteOrganization(@PathVariable Long id) {
+        organizationService.deleteOrganization(id);
+    }
+
+    // Verificar si un dominio está disponible
+    @GetMapping("/check-domain")
+    public boolean isDomainAvailable(@RequestParam String domain) {
+        return organizationService.isDomainAvailable(domain);
+    }
+}

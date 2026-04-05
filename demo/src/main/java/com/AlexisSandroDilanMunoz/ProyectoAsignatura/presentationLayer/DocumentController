@@ -1,0 +1,92 @@
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.*;
+import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.DocumentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDateTime;
+
+@RestController
+@RequestMapping("/api/documents")
+public class DocumentController {
+
+    private final DocumentService documentService;
+
+    // Inyección del servicio mediante constructor
+    public DocumentController(DocumentService documentService) {
+        this.documentService = documentService;
+    }
+
+    // Crear un nuevo documento
+    @PostMapping
+    public DocumentDto createDocument(
+            @RequestBody DocumentCreateDto createDto,
+            @RequestParam Long organizationId,
+            @RequestParam Long creatorId) {
+
+        return documentService.createDocument(createDto, organizationId, creatorId);
+    }
+
+    // Actualizar un documento existente
+    @PutMapping("/{documentId}")
+    public DocumentDto updateDocument(
+            @PathVariable Long documentId,
+            @RequestBody DocumentUpdateDto updateDto) {
+
+        return documentService.updateDocument(documentId, updateDto);
+    }
+
+    // Eliminar un documento por su id
+    @DeleteMapping("/{documentId}")
+    public void deleteDocument(@PathVariable Long documentId) {
+        documentService.deleteDocument(documentId);
+    }
+
+    // Obtener un documento por su id
+    @GetMapping("/{documentId}")
+    public DocumentDto getDocumentById(@PathVariable Long documentId) {
+        return documentService.getDocumentById(documentId);
+    }
+
+    // Listar documentos por organización con paginación
+    @GetMapping("/organization/{organizationId}")
+    public Page<DocumentDto> getDocumentsByOrganization(
+            @PathVariable Long organizationId,
+            Pageable pageable) {
+
+        return documentService.getDocumentsByOrganization(organizationId, pageable);
+    }
+
+    // Filtrar documentos por varios criterios
+    @GetMapping("/filter")
+    public Page<DocumentDto> filterDocuments(
+            @RequestParam Long organizationId,
+            @RequestParam(required = false) Long documentTypeId,
+            @RequestParam(required = false) String state,
+            @RequestParam(required = false) LocalDateTime startDate,
+            @RequestParam(required = false) LocalDateTime endDate,
+            Pageable pageable) {
+
+        return documentService.filterDocuments(
+                organizationId, documentTypeId, state, startDate, endDate, pageable);
+    }
+
+    // Subir archivo asociado a un documento
+    @PostMapping("/{documentId}/upload")
+    public void uploadFile(
+            @PathVariable Long documentId,
+            @RequestParam MultipartFile file,
+            @RequestParam Long userId) {
+
+        documentService.uploadFile(documentId, file, userId);
+    }
+
+    // Descargar archivo de un documento
+    @GetMapping("/{documentId}/download")
+    public byte[] downloadFile(@PathVariable Long documentId) {
+        return documentService.downloadFile(documentId);
+    }
+}
