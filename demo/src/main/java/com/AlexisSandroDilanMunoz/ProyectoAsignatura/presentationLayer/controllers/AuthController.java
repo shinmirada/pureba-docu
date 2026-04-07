@@ -1,4 +1,4 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.LoginRequestDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.LoginResponseDto;
@@ -7,6 +7,14 @@ import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.Organiza
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.AuthService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador REST para la autenticación y gestión de acceso.
+ *
+ * CARACTERÍSTICAS:
+ * - Registro de organizaciones
+ * - Inicio de sesión de usuarios
+ * - Cierre de sesión mediante token
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -18,7 +26,9 @@ public class AuthController {
         this.authService = authService;
     }
 
-    // Endpoint para registrar una nueva organización
+    /**
+     * Registrar una nueva organización en el sistema
+     */
     @PostMapping("/register")
     public OrganizationDto registerOrganization(
             @RequestBody OrganizationCreateDto createDto) {
@@ -26,7 +36,9 @@ public class AuthController {
         return authService.registerOrganization(createDto);
     }
 
-    // Endpoint para iniciar sesión
+    /**
+     * Iniciar sesión en el sistema
+     */
     @PostMapping("/login")
     public LoginResponseDto login(
             @RequestBody LoginRequestDto loginRequest) {
@@ -34,10 +46,12 @@ public class AuthController {
         return authService.login(loginRequest);
     }
 
-    // Endpoint para cerrar sesión
+    /**
+     * Cerrar sesión del usuario autenticado
+     */
     @PostMapping("/logout")
     public void logout(
-            @RequestParam String token) {
+            @RequestHeader("Authorization") String token) {
 
         authService.logout(token);
     }

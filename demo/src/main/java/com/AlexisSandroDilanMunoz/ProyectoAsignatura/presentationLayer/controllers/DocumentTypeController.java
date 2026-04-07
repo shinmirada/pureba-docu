@@ -1,4 +1,4 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.DocumentTypeDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.DocumentTypeService;
@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de tipos de documentos.
+ *
+ * CARACTERÍSTICAS:
+ * - Creación, actualización y eliminación de tipos de documento
+ * - Activación y desactivación de tipos
+ * - Consulta por organización con y sin paginación
+ * - Filtrado de tipos activos
+ */
 @RestController
 @RequestMapping("/api/document-types")
 public class DocumentTypeController {
@@ -19,7 +28,9 @@ public class DocumentTypeController {
         this.documentTypeService = documentTypeService;
     }
 
-    // Crear un nuevo tipo de documento
+    /**
+     * Crear un nuevo tipo de documento
+     */
     @PostMapping
     public DocumentTypeDto createDocumentType(
             @RequestBody DocumentTypeDto dto,
@@ -28,7 +39,9 @@ public class DocumentTypeController {
         return documentTypeService.createDocumentType(dto, organizationId);
     }
 
-    // Actualizar un tipo de documento existente
+    /**
+     * Actualizar un tipo de documento existente
+     */
     @PutMapping("/{typeId}")
     public DocumentTypeDto updateDocumentType(
             @PathVariable Long typeId,
@@ -37,31 +50,41 @@ public class DocumentTypeController {
         return documentTypeService.updateDocumentType(typeId, dto);
     }
 
-    // Eliminar un tipo de documento por su id
+    /**
+     * Eliminar un tipo de documento por su id
+     */
     @DeleteMapping("/{typeId}")
     public void deleteDocumentType(@PathVariable Long typeId) {
         documentTypeService.deleteDocumentType(typeId);
     }
 
-    // Activar un tipo de documento
+    /**
+     * Activar un tipo de documento
+     */
     @PutMapping("/{typeId}/activate")
     public void activateDocumentType(@PathVariable Long typeId) {
         documentTypeService.activateDocumentType(typeId);
     }
 
-    // Desactivar un tipo de documento
+    /**
+     * Desactivar un tipo de documento
+     */
     @PutMapping("/{typeId}/deactivate")
     public void deactivateDocumentType(@PathVariable Long typeId) {
         documentTypeService.deactivateDocumentType(typeId);
     }
 
-    // Obtener un tipo de documento por su id
+    /**
+     * Obtener un tipo de documento por su id
+     */
     @GetMapping("/{typeId}")
     public DocumentTypeDto getDocumentTypeById(@PathVariable Long typeId) {
         return documentTypeService.getDocumentTypeById(typeId);
     }
 
-    // Obtener todos los tipos de documento de una organización
+    /**
+     * Obtener todos los tipos de documento de una organización
+     */
     @GetMapping("/organization/{organizationId}")
     public List<DocumentTypeDto> getAllByOrganization(
             @PathVariable Long organizationId) {
@@ -69,7 +92,9 @@ public class DocumentTypeController {
         return documentTypeService.getAllDocumentTypesByOrganization(organizationId);
     }
 
-    // Obtener tipos de documento paginados por organización
+    /**
+     * Obtener tipos de documento paginados por organización
+     */
     @GetMapping("/organization/{organizationId}/paginated")
     public Page<DocumentTypeDto> getPaginatedByOrganization(
             @PathVariable Long organizationId,
@@ -78,7 +103,9 @@ public class DocumentTypeController {
         return documentTypeService.getDocumentTypesByOrganizationPaginated(organizationId, pageable);
     }
 
-    // Obtener solo los tipos de documento activos de una organización
+    /**
+     * Obtener solo los tipos de documento activos de una organización
+     */
     @GetMapping("/organization/{organizationId}/active")
     public List<DocumentTypeDto> getActiveByOrganization(
             @PathVariable Long organizationId) {

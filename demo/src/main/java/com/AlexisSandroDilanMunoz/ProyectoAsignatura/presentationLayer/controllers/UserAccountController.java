@@ -1,4 +1,4 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.UserAccountCreateDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.UserAccountResponseDto;
@@ -8,6 +8,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de usuarios del sistema.
+ *
+ * CARACTERÍSTICAS:
+ * - Creación y actualización de usuarios
+ * - Activación y desactivación de cuentas
+ * - Asignación y revocación de roles
+ * - Consulta de usuarios por id y por organización
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UserAccountController {
@@ -19,7 +28,9 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-    // Crear un nuevo usuario
+    /**
+     * Crear un nuevo usuario
+     */
     @PostMapping
     public UserAccountResponseDto createUser(
             @RequestBody UserAccountCreateDto createDto,
@@ -28,7 +39,9 @@ public class UserAccountController {
         return userAccountService.createUser(createDto, organizationId);
     }
 
-    // Actualizar un usuario existente
+    /**
+     * Actualizar un usuario existente
+     */
     @PutMapping("/{userId}")
     public UserAccountResponseDto updateUser(
             @PathVariable Long userId,
@@ -37,19 +50,25 @@ public class UserAccountController {
         return userAccountService.updateUser(userId, updateDto);
     }
 
-    // Activar un usuario
+    /**
+     * Activar un usuario
+     */
     @PutMapping("/{userId}/activate")
     public void activateUser(@PathVariable Long userId) {
         userAccountService.activateUser(userId);
     }
 
-    // Desactivar un usuario
+    /**
+     * Desactivar un usuario
+     */
     @PutMapping("/{userId}/deactivate")
     public void deactivateUser(@PathVariable Long userId) {
         userAccountService.deactivateUser(userId);
     }
 
-    // Asignar un rol a un usuario
+    /**
+     * Asignar un rol a un usuario
+     */
     @PutMapping("/{userId}/assign-role")
     public void assignRole(
             @PathVariable Long userId,
@@ -58,7 +77,9 @@ public class UserAccountController {
         userAccountService.assignRole(userId, roleId);
     }
 
-    // Revocar un rol de un usuario
+    /**
+     * Revocar un rol de un usuario
+     */
     @PutMapping("/{userId}/revoke-role")
     public void revokeRole(
             @PathVariable Long userId,
@@ -67,13 +88,17 @@ public class UserAccountController {
         userAccountService.revokeRole(userId, roleId);
     }
 
-    // Obtener un usuario por su id
+    /**
+     * Obtener un usuario por su id
+     */
     @GetMapping("/{userId}")
     public UserAccountResponseDto getUserById(@PathVariable Long userId) {
         return userAccountService.getUserById(userId);
     }
 
-    // Obtener usuarios de una organización
+    /**
+     * Obtener usuarios de una organización
+     */
     @GetMapping("/organization/{organizationId}")
     public List<UserAccountResponseDto> getUsersByOrganization(
             @PathVariable Long organizationId) {

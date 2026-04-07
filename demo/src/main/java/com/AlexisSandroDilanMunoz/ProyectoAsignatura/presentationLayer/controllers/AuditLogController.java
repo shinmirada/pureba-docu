@@ -1,4 +1,4 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.AuditLogDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.AuditLogService;
@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
+/**
+ * Controlador REST para la gestión de logs de auditoría.
+ *
+ * CARACTERÍSTICAS:
+ * - Registro de acciones realizadas en el sistema
+ * - Consulta de logs por documento
+ * - Consulta de logs por organización con filtros opcionales
+ */
 @RestController
 @RequestMapping("/api/audit-logs")
 public class AuditLogController {
@@ -19,7 +27,9 @@ public class AuditLogController {
         this.auditLogService = auditLogService;
     }
 
-    // Endpoint para registrar una acción en el log
+    /**
+     * Registrar una acción en el log de auditoría
+     */
     @PostMapping
     public void logAction(
             @RequestParam String actionType,
@@ -31,7 +41,9 @@ public class AuditLogController {
         auditLogService.logAction(actionType, actionDetail, documentId, userId, ipAddress);
     }
 
-    // Endpoint para obtener los logs asociados a un documento específico
+    /**
+     * Obtener los logs asociados a un documento específico
+     */
     @GetMapping("/document/{documentId}")
     public Page<AuditLogDto> getDocumentLogs(
             @PathVariable Long documentId,
@@ -40,7 +52,9 @@ public class AuditLogController {
         return auditLogService.getDocumentAuditLog(documentId, pageable);
     }
 
-    // Endpoint para obtener logs de una organización con filtros opcionales
+    /**
+     * Obtener logs de una organización con filtros opcionales
+     */
     @GetMapping("/organization/{organizationId}")
     public Page<AuditLogDto> getOrganizationLogs(
             @PathVariable Long organizationId,

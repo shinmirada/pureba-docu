@@ -1,4 +1,4 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.NotificationTemplateDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.NotificationTemplateService;
@@ -6,6 +6,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de plantillas de notificaciones.
+ *
+ * CARACTERÍSTICAS:
+ * - Creación, actualización y eliminación de plantillas
+ * - Activación y desactivación de plantillas
+ * - Consulta de plantillas por organización
+ * - Filtrado de plantillas activas
+ */
 @RestController
 @RequestMapping("/api/notification-templates")
 public class NotificationTemplateController {
@@ -17,7 +26,9 @@ public class NotificationTemplateController {
         this.notificationTemplateService = notificationTemplateService;
     }
 
-    // Crear una nueva plantilla de notificación
+    /**
+     * Crear una nueva plantilla de notificación
+     */
     @PostMapping
     public NotificationTemplateDto createTemplate(
             @RequestBody NotificationTemplateDto dto,
@@ -26,7 +37,9 @@ public class NotificationTemplateController {
         return notificationTemplateService.createTemplate(dto, organizationId);
     }
 
-    // Actualizar una plantilla existente
+    /**
+     * Actualizar una plantilla existente
+     */
     @PutMapping("/{templateId}")
     public NotificationTemplateDto updateTemplate(
             @PathVariable Long templateId,
@@ -35,31 +48,41 @@ public class NotificationTemplateController {
         return notificationTemplateService.updateTemplate(templateId, dto);
     }
 
-    // Eliminar una plantilla por su id
+    /**
+     * Eliminar una plantilla por su id
+     */
     @DeleteMapping("/{templateId}")
     public void deleteTemplate(@PathVariable Long templateId) {
         notificationTemplateService.deleteTemplate(templateId);
     }
 
-    // Activar una plantilla
+    /**
+     * Activar una plantilla
+     */
     @PutMapping("/{templateId}/activate")
     public void activateTemplate(@PathVariable Long templateId) {
         notificationTemplateService.activateTemplate(templateId);
     }
 
-    // Desactivar una plantilla
+    /**
+     * Desactivar una plantilla
+     */
     @PutMapping("/{templateId}/deactivate")
     public void deactivateTemplate(@PathVariable Long templateId) {
         notificationTemplateService.deactivateTemplate(templateId);
     }
 
-    // Obtener una plantilla por su id
+    /**
+     * Obtener una plantilla por su id
+     */
     @GetMapping("/{templateId}")
     public NotificationTemplateDto getTemplateById(@PathVariable Long templateId) {
         return notificationTemplateService.getTemplateById(templateId);
     }
 
-    // Obtener todas las plantillas de una organización
+    /**
+     * Obtener todas las plantillas de una organización
+     */
     @GetMapping("/organization/{organizationId}")
     public List<NotificationTemplateDto> getByOrganization(
             @PathVariable Long organizationId) {
@@ -67,7 +90,9 @@ public class NotificationTemplateController {
         return notificationTemplateService.getTemplatesByOrganization(organizationId);
     }
 
-    // Obtener solo las plantillas activas de una organización
+    /**
+     * Obtener solo las plantillas activas de una organización
+     */
     @GetMapping("/organization/{organizationId}/active")
     public List<NotificationTemplateDto> getActiveByOrganization(
             @PathVariable Long organizationId) {

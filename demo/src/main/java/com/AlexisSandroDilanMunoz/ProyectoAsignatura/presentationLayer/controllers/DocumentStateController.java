@@ -1,4 +1,4 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.DocumentStateDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.DocumentStateService;
@@ -6,6 +6,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de estados de documentos.
+ *
+ * CARACTERÍSTICAS:
+ * - Creación, actualización y eliminación de estados
+ * - Consulta de estados por organización
+ * - Ordenamiento y reorganización de estados
+ */
 @RestController
 @RequestMapping("/api/document-states")
 public class DocumentStateController {
@@ -17,7 +25,9 @@ public class DocumentStateController {
         this.documentStateService = documentStateService;
     }
 
-    // Crear un nuevo estado de documento
+    /**
+     * Crear un nuevo estado de documento
+     */
     @PostMapping
     public DocumentStateDto createState(
             @RequestBody DocumentStateDto dto,
@@ -26,7 +36,9 @@ public class DocumentStateController {
         return documentStateService.createState(dto, organizationId);
     }
 
-    // Actualizar un estado existente
+    /**
+     * Actualizar un estado existente
+     */
     @PutMapping("/{stateId}")
     public DocumentStateDto updateState(
             @PathVariable Long stateId,
@@ -35,13 +47,17 @@ public class DocumentStateController {
         return documentStateService.updateState(stateId, dto);
     }
 
-    // Eliminar un estado por su id
+    /**
+     * Eliminar un estado por su id
+     */
     @DeleteMapping("/{stateId}")
     public void deleteState(@PathVariable Long stateId) {
         documentStateService.deleteState(stateId);
     }
 
-    // Obtener todos los estados de una organización
+    /**
+     * Obtener todos los estados de una organización
+     */
     @GetMapping("/organization/{organizationId}")
     public List<DocumentStateDto> getStatesByOrganization(
             @PathVariable Long organizationId) {
@@ -49,7 +65,9 @@ public class DocumentStateController {
         return documentStateService.getStatesByOrganization(organizationId);
     }
 
-    // Obtener los estados ordenados de una organización
+    /**
+     * Obtener los estados ordenados de una organización
+     */
     @GetMapping("/organization/{organizationId}/ordered")
     public List<DocumentStateDto> getStatesOrdered(
             @PathVariable Long organizationId) {
@@ -57,7 +75,9 @@ public class DocumentStateController {
         return documentStateService.getStatesOrdered(organizationId);
     }
 
-    // Reordenar los estados de una organización
+    /**
+     * Reordenar los estados de una organización
+     */
     @PutMapping("/organization/{organizationId}/reorder")
     public void reorderStates(
             @PathVariable Long organizationId,

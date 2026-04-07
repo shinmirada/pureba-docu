@@ -1,14 +1,24 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.*;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.DocumentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
+/**
+ * Controlador REST para la gestión de documentos.
+ *
+ * CARACTERÍSTICAS:
+ * - Creación, actualización y eliminación de documentos
+ * - Consulta individual y listados con paginación
+ * - Filtros avanzados por tipo, estado y fechas
+ * - Gestión de archivos asociados (subida y descarga)
+ */
 @RestController
 @RequestMapping("/api/documents")
 public class DocumentController {
@@ -20,7 +30,9 @@ public class DocumentController {
         this.documentService = documentService;
     }
 
-    // Crear un nuevo documento
+    /**
+     * Crear un nuevo documento
+     */
     @PostMapping
     public DocumentDto createDocument(
             @RequestBody DocumentCreateDto createDto,
@@ -30,7 +42,9 @@ public class DocumentController {
         return documentService.createDocument(createDto, organizationId, creatorId);
     }
 
-    // Actualizar un documento existente
+    /**
+     * Actualizar un documento existente
+     */
     @PutMapping("/{documentId}")
     public DocumentDto updateDocument(
             @PathVariable Long documentId,
@@ -39,19 +53,25 @@ public class DocumentController {
         return documentService.updateDocument(documentId, updateDto);
     }
 
-    // Eliminar un documento por su id
+    /**
+     * Eliminar un documento por su id
+     */
     @DeleteMapping("/{documentId}")
     public void deleteDocument(@PathVariable Long documentId) {
         documentService.deleteDocument(documentId);
     }
 
-    // Obtener un documento por su id
+    /**
+     * Obtener un documento por su id
+     */
     @GetMapping("/{documentId}")
     public DocumentDto getDocumentById(@PathVariable Long documentId) {
         return documentService.getDocumentById(documentId);
     }
 
-    // Listar documentos por organización con paginación
+    /**
+     * Listar documentos por organización con paginación
+     */
     @GetMapping("/organization/{organizationId}")
     public Page<DocumentDto> getDocumentsByOrganization(
             @PathVariable Long organizationId,
@@ -60,7 +80,9 @@ public class DocumentController {
         return documentService.getDocumentsByOrganization(organizationId, pageable);
     }
 
-    // Filtrar documentos por varios criterios
+    /**
+     * Filtrar documentos por múltiples criterios
+     */
     @GetMapping("/filter")
     public Page<DocumentDto> filterDocuments(
             @RequestParam Long organizationId,
@@ -74,19 +96,29 @@ public class DocumentController {
                 organizationId, documentTypeId, state, startDate, endDate, pageable);
     }
 
-    // Subir archivo asociado a un documento
+    /**
+     * Subir archivo asociado a un documento
+     */
     @PostMapping("/{documentId}/upload")
     public void uploadFile(
             @PathVariable Long documentId,
-            @RequestParam MultipartFile file,
+            @RequestParam("file") MultipartFile file,
             @RequestParam Long userId) {
 
         documentService.uploadFile(documentId, file, userId);
     }
 
-    // Descargar archivo de un documento
+    /**
+     * Descargar archivo asociado a un documento
+     */
     @GetMapping("/{documentId}/download")
-    public byte[] downloadFile(@PathVariable Long documentId) {
-        return documentService.downloadFile(documentId);
+    public ResponseEntity<byte[]> downloadFile(@PathVariable Long documentId) {
+
+        byte[] file = documentService.downloadFile(documentId);
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=document")
+                .header("Content-Type", "application/octet-stream")
+                .body(file);
     }
 }

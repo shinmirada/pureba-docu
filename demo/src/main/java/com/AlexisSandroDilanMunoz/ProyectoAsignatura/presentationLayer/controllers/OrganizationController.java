@@ -1,10 +1,18 @@
-package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controller;
+package com.AlexisSandroDilanMunoz.ProyectoAsignatura.presentationLayer.controllers;
 
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.OrganizationCreateDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.dtos.OrganizationDto;
 import com.AlexisSandroDilanMunoz.ProyectoAsignatura.businessLayer.service.OrganizationService;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controlador REST para la gestión de organizaciones.
+ *
+ * CARACTERÍSTICAS:
+ * - Creación, consulta, actualización y eliminación de organizaciones
+ * - Obtención de la organización asociada al usuario actual
+ * - Validación de disponibilidad de dominio
+ */
 @RestController
 @RequestMapping("/api/organizations")
 public class OrganizationController {
@@ -16,7 +24,9 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    // Crear una nueva organización
+    /**
+     * Crear una nueva organización
+     */
     @PostMapping
     public OrganizationDto createOrganization(
             @RequestBody OrganizationCreateDto createDto) {
@@ -24,19 +34,25 @@ public class OrganizationController {
         return organizationService.createOrganization(createDto);
     }
 
-    // Obtener una organización por su id
+    /**
+     * Obtener una organización por su id
+     */
     @GetMapping("/{id}")
     public OrganizationDto getOrganizationById(@PathVariable Long id) {
         return organizationService.getOrganizationById(id);
     }
 
-    // Obtener la organización actual (según contexto del usuario)
+    /**
+     * Obtener la organización actual del usuario autenticado
+     */
     @GetMapping("/current")
     public OrganizationDto getCurrentOrganization() {
         return organizationService.getCurrentOrganization();
     }
 
-    // Actualizar datos de una organización
+    /**
+     * Actualizar los datos de una organización
+     */
     @PutMapping("/{id}")
     public OrganizationDto updateOrganization(
             @PathVariable Long id,
@@ -46,13 +62,17 @@ public class OrganizationController {
         return organizationService.updateOrganization(id, name, domain);
     }
 
-    // Eliminar una organización por su id
+    /**
+     * Eliminar una organización por su id
+     */
     @DeleteMapping("/{id}")
     public void deleteOrganization(@PathVariable Long id) {
         organizationService.deleteOrganization(id);
     }
 
-    // Verificar si un dominio está disponible
+    /**
+     * Verificar si un dominio está disponible
+     */
     @GetMapping("/check-domain")
     public boolean isDomainAvailable(@RequestParam String domain) {
         return organizationService.isDomainAvailable(domain);
